@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Facebook, Instagram, ExternalLink } from 'lucide-react';
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [mapInteractive, setMapInteractive] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,8 +26,6 @@ export default function Contact() {
         setIsSuccess(true);
         e.currentTarget.reset();
         setTimeout(() => setIsSuccess(false), 5000);
-      } else {
-        console.error('Form submission failed');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -36,23 +35,29 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-pure-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-pure-white relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 -mr-24 -mt-24 h-96 w-96 rounded-full bg-sky-blue/5 blur-3xl pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           
           {/* Form Column */}
           <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-gray-100 relative">
-            <h3 className="font-heading text-3xl font-bold text-deep-navy mb-6">Request Service</h3>
+            <div className="mb-8">
+              <h3 className="font-heading text-3xl font-bold text-deep-navy mb-2">Request Service</h3>
+              <p className="text-gray-500 italic">Get the "Pool Whisperer" on the job.</p>
+            </div>
             
-            {isSuccess ? (
-              <div className="absolute inset-0 bg-white rounded-3xl flex flex-col items-center justify-center p-8 text-center z-10">
+            {isSuccess && (
+              <div className="absolute inset-0 bg-white rounded-3xl flex flex-col items-center justify-center p-8 text-center z-20 animate-in fade-in zoom-in duration-300">
                 <div className="w-20 h-20 bg-palm-green/10 text-palm-green rounded-full flex items-center justify-center mb-6">
                   <Send size={40} />
                 </div>
                 <h5 className="font-heading text-2xl font-bold text-deep-navy mb-2">Message Sent!</h5>
-                <p className="text-gray-600">Thanks for reaching out. Calvin or a team member will contact you shortly.</p>
+                <p className="text-gray-600">Thanks for reaching out. Calvin will contact you shortly.</p>
               </div>
-            ) : null}
+            )}
 
             <form 
               onSubmit={handleSubmit} 
@@ -62,94 +67,121 @@ export default function Contact() {
               action="/forms.html"
               data-netlify="true"
               netlify-honeypot="bot-field"
-              encType="multipart/form-data"
             >
               <input type="hidden" name="form-name" value="contact" />
               <div style={{ display: 'none' }}>
-                <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
+                <label>Don't fill this out: <input name="bot-field" /></label>
               </div>
               
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sky-blue focus:border-transparent outline-none transition-all" placeholder="John Doe" />
+                <label htmlFor="name" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Full Name</label>
+                <input type="text" id="name" name="name" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="Your Name" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sky-blue focus:border-transparent outline-none transition-all" placeholder="(954) 383-1203" />
+                  <label htmlFor="phone" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Phone</label>
+                  <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="(954) 383-1203" />
                 </div>
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">Service Needed</label>
-                  <select id="service" name="service" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sky-blue focus:border-transparent outline-none transition-all bg-white">
+                  <label htmlFor="service" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Service</label>
+                  <select id="service" name="service" className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all bg-white">
                     <option>Equipment Repair</option>
                     <option>Leak Detection</option>
-                    <option>Heater Service</option>
                     <option>Automation System</option>
-                    <option>Salt System Install</option>
+                    <option>Energy-Efficient Pumps</option>
                     <option>Other / Not Sure</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">Service Address</label>
-                <input type="text" id="address" name="address" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sky-blue focus:border-transparent outline-none transition-all" placeholder="123 Main St, Tamarac, FL" />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Describe the Issue</label>
-                <textarea id="message" name="message" rows={4} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-sky-blue focus:border-transparent outline-none transition-all resize-none" placeholder="Tell us what's going on with your pool..."></textarea>
+                <label htmlFor="address" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Address</label>
+                <input type="text" id="address" name="address" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="City, Zip Code" />
               </div>
 
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full bg-warm-orange hover:bg-warm-orange/90 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-lg hover:shadow-xl"
+                className="w-full bg-warm-orange hover:bg-deep-navy text-white font-black py-5 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-70 shadow-xl active:scale-95 uppercase tracking-wider"
               >
-                {isSubmitting ? 'Sending...' : 'Request Service'}
+                {isSubmitting ? 'Sending...' : 'Request My Estimate'}
+                {!isSubmitting && <Send size={20} />}
               </button>
             </form>
           </div>
 
           {/* Map Column */}
-          <div className="lg:sticky lg:top-32">
-            <h2 className="text-sky-blue font-semibold tracking-wide uppercase text-sm mb-3">Our Service Area</h2>
-            <h3 className="font-heading text-4xl font-bold text-deep-navy mb-6">Serving Broward County</h3>
-            <p className="text-gray-600 text-lg mb-8">
-              We provide expert pool and spa repair services across Tamarac, Fort Lauderdale, and the surrounding Broward County communities.
-            </p>
+          <div className="lg:sticky lg:top-32 space-y-8">
+            <div>
+              <h2 className="text-sky-blue font-bold tracking-[0.2em] uppercase text-sm mb-3">Expert Diagnostics</h2>
+              <h3 className="font-heading text-4xl lg:text-5xl font-extrabold text-deep-navy mb-4 leading-tight">
+                Serving Broward County
+              </h3>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                Expert pool and spa repair services across Tamarac, Fort Lauderdale, and surrounding communities.
+              </p>
+            </div>
             
-            <div className="w-full h-[300px] lg:h-[400px] rounded-2xl overflow-hidden border-4 border-white shadow-2xl">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114543.51878415758!2d-80.2858105!3d26.21345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d90613f7b9f36d%3A0x6d9f8e0e0e0e0e0e!2sTamarac%2C%20FL!5e0!3m2!1sen!2sus!4v1712589000000!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={true} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+            {/* The PROVIDED Map Container */}
+            <div className="group relative">
+              <div className="flex items-center justify-between px-1 mb-3">
+                <span className="text-xs font-bold text-deep-navy uppercase tracking-widest flex items-center gap-2">
+                  <MapPin size={14} className="text-sky-blue" /> Tamarac & Fort Lauderdale
+                </span>
+                <a 
+                  href="https://maps.google.com/?cid=8506501591724267999&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[10px] font-black text-sky-blue uppercase flex items-center gap-1 hover:underline"
+                >
+                  Open in Maps <ExternalLink size={10} />
+                </a>
+              </div>
+              
+              <div 
+                className="w-full h-[300px] lg:h-[350px] rounded-2xl overflow-hidden border-4 border-white shadow-2xl relative cursor-pointer"
+                onClick={() => setMapInteractive(true)}
+                onMouseLeave={() => setMapInteractive(false)}
+              >
+                {/* YOUR EXACT IFRAME CODE INTEGRATED BELOW */}
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114480.08271985978!2d-80.18145800269512!3d26.277802510316775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9057d5f394b6b%3A0x760d2a20d80519df!2sBlue%20Oasis%20Pool%20%26%20Spa%20Repair%20inc!5e0!3m2!1sen!2sus!4v1775665908665!5m2!1sen!2sus" 
+                  className={`w-full h-full transition-opacity duration-300 ${mapInteractive ? 'opacity-100' : 'opacity-80'}`}
+                  style={{ border: 0 }} 
+                  allowFullScreen
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Blue Oasis Pool & Spa Repair Inc Location"
+                ></iframe>
+                
+                {!mapInteractive && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="bg-white/95 backdrop-blur-md px-6 py-2 rounded-full shadow-lg text-xs font-bold text-deep-navy border border-sky-blue/10">
+                      Tap to interact
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-6">
+            {/* Socials & Contact */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex items-start gap-3">
-                <div className="text-sky-blue mt-1"><Phone size={20} /></div>
+                <div className="bg-sky-blue/10 p-2 rounded-lg text-sky-blue"><Phone size={20} /></div>
                 <div>
-                  <p className="font-bold text-deep-navy">Call Calvin</p>
-                  <a href="tel:9543831203" className="text-gray-600 hover:text-warm-orange transition-colors">(954) 383-1203</a>
+                  <p className="font-black text-deep-navy uppercase text-[10px] tracking-widest">Call Calvin</p>
+                  <a href="tel:9543831203" className="text-md font-bold text-gray-700 hover:text-warm-orange transition-colors">(954) 383-1203</a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="text-sky-blue mt-1"><Mail size={20} /></div>
-                <div>
-                  <p className="font-bold text-deep-navy">Email Us</p>
-                  <a href="mailto:blueoasis.psr@gmail.com" className="text-gray-600 hover:text-warm-orange transition-colors">blueoasis.psr@gmail.com</a>
+                <div className="flex gap-3">
+                  <a href="https://www.facebook.com/blueoasispoolandspa/" target="_blank" rel="noopener noreferrer" className="bg-sky-blue/10 p-2 rounded-lg text-sky-blue hover:bg-sky-blue hover:text-white transition-all"><Facebook size={20} /></a>
+                  <a href="https://www.instagram.com/blueoasis.psr/" target="_blank" rel="noopener noreferrer" className="bg-sky-blue/10 p-2 rounded-lg text-sky-blue hover:bg-sky-blue hover:text-white transition-all"><Instagram size={20} /></a>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

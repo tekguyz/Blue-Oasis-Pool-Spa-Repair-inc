@@ -1,60 +1,88 @@
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, CheckCircle } from 'lucide-react';
 
-const testimonials = [
+const reviews = [
   {
-    name: 'Sarah Jenkins',
-    location: 'Fort Lauderdale, FL',
-    text: 'Three other companies couldn&apos;t find the leak. Calvin came out, found it in 20 minutes, and had it patched. He truly is the pool whisperer.',
+    name: "Rick Cordary",
+    text: "We hired Calvin, owner of Blue Oasis Pool & Spa Repair Inc, to completely renovate our pool. He was prompt in assessing the project and provided a very fair estimate. The work began and finished right on schedule, and the results are outstanding. I highly recommend Calvin and his team.",
+    highlight: "Results are outstanding. Highly recommend Calvin."
   },
   {
-    name: 'Michael Rodriguez',
-    location: 'Hollywood, FL',
-    text: 'Upgraded our entire system to Pentair automation. Calvin&apos;s attention to detail is unmatched. Everything is perfectly labeled and the app works flawlessly.',
+    name: "Wendy Aaronson",
+    text: "Upgraded my old pool lights to a new LED system and Blue Oasis got the job done quickly. The price was better than my pool company wanted and they know how to do the job right. I will have them replace my pool heater next.",
+    highlight: "Price was better and they do the job right."
   },
   {
-    name: 'David & Lisa Chen',
-    location: 'Boca Raton, FL',
-    text: 'Calvin diagnosed a pump issue that two other techs missed. He saved us thousands by repairing instead of replacing. Honest, fast, and incredibly skilled.',
+    name: "Suzette Bedley",
+    text: "This is a top notch, no nonsense, straightforward pool company. Excellent communication, customer service and quality work. Very knowledgeable. Cant say enough about them.",
+    highlight: "Top notch, no nonsense, and very knowledgeable."
   }
 ];
 
 export default function Testimonials() {
   return (
-    <section id="reviews" className="py-24 bg-deep-navy text-white relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-sky-blue/10 blur-[120px] rounded-full -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-warm-orange/5 blur-[120px] rounded-full -z-10" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-sky-blue font-semibold tracking-wide uppercase text-sm mb-3">5.0 Star Reputation</h2>
-          <h3 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-white">Why They Call Him The Whisperer</h3>
-          <p className="text-gray-400 text-lg">
-            Real stories from homeowners who stopped stressing and started enjoying their pools again.
-          </p>
+    <section id="reviews" className="py-24 bg-deep-navy relative overflow-hidden">
+      {/* Subtle Background Water Graphic */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-sky-blue blur-[120px]" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-sky-blue font-bold tracking-[0.3em] uppercase text-xs mb-4">Real Reputation</h2>
+          <h3 className="font-heading text-4xl md:text-6xl font-extrabold text-white mb-8 leading-tight">
+            5.0 Stars For The <span className="text-warm-orange italic">Pool Whisperer</span>
+          </h3>
+          <div className="inline-flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-3 rounded-full">
+            <div className="flex gap-1 text-warm-orange">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} fill="currentColor" />
+              ))}
+            </div>
+            <span className="text-white font-bold tracking-wide">15+ Years of Local Trust</span>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+        <div className="grid lg:grid-cols-3 gap-8">
+          {reviews.map((review, index) => (
             <div 
               key={index} 
-              className="bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl relative flex flex-col h-full hover:bg-white/[0.15] transition-colors duration-300"
+              className="group bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-[2.5rem] flex flex-col relative hover:bg-white/[0.08] transition-all duration-500 hover:-translate-y-2 shadow-2xl"
             >
-              <Quote className="absolute top-6 right-6 text-white/10" size={48} />
+              <Quote className="absolute top-8 right-10 text-white/5 group-hover:text-sky-blue/20 transition-all duration-500" size={56} />
               
-              <div className="flex text-warm-orange mb-6">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={20} fill="currentColor" className="fill-warm-orange" />
+              <div className="flex gap-1 text-warm-orange mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={14} fill="currentColor" />
                 ))}
               </div>
 
-              <p className="text-white text-lg leading-relaxed mb-8 relative z-10 flex-grow italic">
-                &quot;{testimonial.text}&quot;
+              <div className="mb-6">
+                <p className="text-sky-blue font-black text-xs uppercase tracking-[0.15em] mb-3">The Result:</p>
+                <p className="text-white text-xl font-bold leading-snug">
+                  "{review.highlight}"
+                </p>
+              </div>
+
+              <p className="text-gray-400 text-md leading-relaxed mb-8 flex-grow">
+                {review.text}
               </p>
 
-              <div className="mt-auto pt-6 border-t border-white/10">
-                <p className="font-heading font-bold text-lg text-white">{testimonial.name}</p>
-                <p className="text-sky-blue text-sm font-medium">{testimonial.location}</p>
+              <div className="pt-8 border-t border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-sky-blue/20 rounded-full flex items-center justify-center text-sky-blue font-black text-sm">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-white font-bold flex items-center gap-2 text-sm">
+                      {review.name}
+                      <CheckCircle size={14} className="text-palm-green" />
+                    </p>
+                    <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mt-0.5">Verified Customer</p>
+                  </div>
+                </div>
+                <div className="text-[9px] font-black text-warm-orange uppercase border border-warm-orange/30 px-2 py-1 rounded-md tracking-tighter">
+                  Google Review
+                </div>
               </div>
             </div>
           ))}
