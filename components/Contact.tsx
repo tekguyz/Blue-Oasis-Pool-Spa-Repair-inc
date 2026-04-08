@@ -7,15 +7,32 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
+
+    const formData = new FormData(e.currentTarget);
+    formData.append('form-name', 'contact');
+
+    try {
+      const response = await fetch('/forms.html', {
+        method: 'POST',
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData,
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        e.currentTarget.reset();
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        console.error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    }
   };
 
   return (
@@ -42,9 +59,15 @@ export default function Contact() {
               className="space-y-6"
               name="contact"
               method="POST"
+              action="/forms.html"
               data-netlify="true"
+              netlify-honeypot="bot-field"
+              encType="multipart/form-data"
             >
               <input type="hidden" name="form-name" value="contact" />
+              <div style={{ display: 'none' }}>
+                <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
+              </div>
               
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
@@ -97,7 +120,7 @@ export default function Contact() {
               We provide expert pool and spa repair services across Tamarac, Fort Lauderdale, and the surrounding Broward County communities.
             </p>
             
-            <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-lg border-0">
+            <div className="w-full h-[300px] lg:h-[400px] rounded-2xl overflow-hidden border-4 border-white shadow-2xl">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114543.51878415758!2d-80.2858105!3d26.21345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d90613f7b9f36d%3A0x6d9f8e0e0e0e0e0e!2sTamarac%2C%20FL!5e0!3m2!1sen!2sus!4v1712589000000!5m2!1sen!2sus" 
                 width="100%" 

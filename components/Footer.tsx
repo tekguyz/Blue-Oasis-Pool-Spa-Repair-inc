@@ -21,9 +21,37 @@ export default function Footer() {
           </div>
 
           <div>
+            <h4 className="font-heading font-bold text-lg mb-6 text-white">Stay Connected</h4>
+            <div className="flex flex-col gap-4">
+              <a 
+                href="https://www.facebook.com/blueoasispoolandspa/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-sky-blue/10 flex items-center justify-center text-sky-blue group-hover:bg-sky-blue group-hover:text-white transition-all">
+                  <Facebook size={20} />
+                </div>
+                <span className="text-white font-medium">Facebook</span>
+              </a>
+              <a 
+                href="https://www.instagram.com/blueoasis.psr/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-sky-blue/10 flex items-center justify-center text-sky-blue group-hover:bg-sky-blue group-hover:text-white transition-all">
+                  <Instagram size={20} />
+                </div>
+                <span className="text-white font-medium">Instagram</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
             <h4 className="font-heading font-bold text-lg mb-6 text-white">Service Areas</h4>
             <ul className="space-y-4 text-gray-400">
-              <li>Tamarac, FL</li>
+              <li>Tamarac, FL (Headquarters)</li>
               <li>Fort Lauderdale, FL</li>
               <li>Coral Springs, FL</li>
               <li>Sunrise, FL</li>

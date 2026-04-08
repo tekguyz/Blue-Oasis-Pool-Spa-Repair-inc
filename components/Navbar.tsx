@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, Facebook, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
@@ -46,7 +46,27 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-10 items-center">
+          <div className="hidden md:flex space-x-8 items-center">
+            <div className="flex items-center gap-4 mr-4 border-r border-deep-navy/10 pr-6">
+              <a 
+                href="https://www.facebook.com/blueoasispoolandspa/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-deep-navy/40 hover:text-sky-blue transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a 
+                href="https://www.instagram.com/blueoasis.psr/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-deep-navy/40 hover:text-sky-blue transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+            </div>
             {navLinks.map((link) => (
               <Link 
                 key={link.name} 
