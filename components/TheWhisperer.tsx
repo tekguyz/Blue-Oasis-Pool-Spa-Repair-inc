@@ -14,6 +14,7 @@ export default function TheWhisperer() {
                 fill
                 className="object-cover"
                 referrerPolicy="no-referrer"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             {/* Floating Badge */}
@@ -71,6 +72,7 @@ export default function TheWhisperer() {
                   fill
                   className="object-cover"
                   referrerPolicy="no-referrer"
+                  sizes="64px"
                 />
               </div>
               <div>

@@ -8,12 +8,13 @@ export default function Hero() {
       {/* Background Pattern/Image Overlay */}
       <div className="absolute inset-0 opacity-40 mix-blend-multiply">
         <Image
-          src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1920&auto=format&fit=crop"
-          alt="Sparkling pool water at twilight"
+          src="https://images.unsplash.com/photo-1530631673369-bc20fdb32288?q=80&w=1920&auto=format&fit=crop"
+          alt="Crystal clear luxury pool water"
           fill
           className="object-cover"
           referrerPolicy="no-referrer"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/80 to-transparent" />
       </div>
@@ -60,11 +61,13 @@ export default function Hero() {
 
           <div className="hidden lg:block relative h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl border border-white/10">
             <Image
-              src="https://picsum.photos/seed/luxury-pool/800/1200"
-              alt="Beautiful luxury pool"
+              src="https://images.unsplash.com/photo-1530631673369-bc20fdb32288?q=80&w=1200&auto=format&fit=crop"
+              alt="Luxury pool automation and design"
               fill
               className="object-cover"
               referrerPolicy="no-referrer"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
         </div>
