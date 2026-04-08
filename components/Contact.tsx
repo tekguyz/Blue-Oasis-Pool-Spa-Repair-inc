@@ -46,7 +46,7 @@ export default function Contact() {
           <div className="bg-white rounded-3xl p-8 md:p-10 shadow-2xl border border-gray-100 relative">
             <div className="mb-8">
               <h3 className="font-heading text-3xl font-bold text-deep-navy mb-2">Request Service</h3>
-              <p className="text-gray-500 italic">Get the "Pool Whisperer" on the job.</p>
+              <p className="text-gray-500 italic">Get the &quot;Pool Whisperer&quot; on the job.</p>
             </div>
             
             {isSuccess && (
@@ -70,22 +70,44 @@ export default function Contact() {
             >
               <input type="hidden" name="form-name" value="contact" />
               <div style={{ display: 'none' }}>
-                <label>Don't fill this out: <input name="bot-field" /></label>
+                <label htmlFor="bot-field">Don&apos;t fill this out: </label>
+                <input id="bot-field" name="bot-field" />
               </div>
               
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Full Name</label>
-                <input type="text" id="name" name="name" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="Your Name" />
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required 
+                  className="w-full px-4 py-4 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all min-h-[56px]" 
+                  placeholder="Your Name" 
+                  autoComplete="name"
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="phone" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Phone</label>
-                  <input type="tel" id="phone" name="phone" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="(954) 383-1203" />
+                  <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    required 
+                    className="w-full px-4 py-4 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all min-h-[56px]" 
+                    placeholder="(954) 383-1203" 
+                    autoComplete="tel"
+                  />
                 </div>
                 <div>
                   <label htmlFor="service" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Service</label>
-                  <select id="service" name="service" className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all bg-white">
+                  <select 
+                    id="service" 
+                    name="service" 
+                    className="w-full px-4 py-4 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all bg-white min-h-[56px]"
+                    aria-label="Select the service you need"
+                  >
                     <option>Equipment Repair</option>
                     <option>Leak Detection</option>
                     <option>Automation System</option>
@@ -97,16 +119,25 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="address" className="block text-sm font-bold text-deep-navy mb-2 uppercase tracking-wide">Address</label>
-                <input type="text" id="address" name="address" required className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all" placeholder="City, Zip Code" />
+                <input 
+                  type="text" 
+                  id="address" 
+                  name="address" 
+                  required 
+                  className="w-full px-4 py-4 rounded-xl border-2 border-gray-100 focus:border-sky-blue focus:ring-4 focus:ring-sky-blue/5 outline-none transition-all min-h-[56px]" 
+                  placeholder="City, Zip Code" 
+                  autoComplete="street-address"
+                />
               </div>
 
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full bg-warm-orange hover:bg-deep-navy text-white font-black py-5 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-70 shadow-xl active:scale-95 uppercase tracking-wider"
+                className="w-full bg-warm-orange hover:bg-deep-navy text-white font-black py-5 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-70 shadow-premium hover:shadow-premium-hover active:scale-95 uppercase tracking-wider min-h-[60px]"
+                aria-label={isSubmitting ? "Sending your request..." : "Request My Estimate"}
               >
                 {isSubmitting ? 'Sending...' : 'Request My Estimate'}
-                {!isSubmitting && <Send size={20} />}
+                {!isSubmitting && <Send size={20} aria-hidden="true" />}
               </button>
             </form>
           </div>
