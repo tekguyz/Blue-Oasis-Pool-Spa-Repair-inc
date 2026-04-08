@@ -13,6 +13,7 @@ export default function Hero() {
           fill
           className="object-cover opacity-20 scale-105" // Subtle zoom for depth
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#141E33] via-[#141E33]/90 to-[#141E33]" />
       </div>
@@ -75,6 +76,7 @@ export default function Hero() {
                 alt="Premium Pool Service Result"
                 fill
                 className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#141E33]/60 via-transparent to-transparent" />
             </div>

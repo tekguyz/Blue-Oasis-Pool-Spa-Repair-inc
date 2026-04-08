@@ -34,11 +34,11 @@ export default function Testimonials() {
             5.0 Stars For The <span className="text-warm-orange italic">Pool Whisperer</span>
           </h3>
           <div className="inline-flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-3 rounded-full backdrop-blur-sm">
-            <div className="flex gap-1 text-warm-orange" aria-label="5 out of 5 stars">
+            <span className="flex gap-1 text-warm-orange" role="img" aria-label="5 out of 5 stars">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} size={20} fill="currentColor" aria-hidden="true" />
               ))}
-            </div>
+            </span>
             <span className="text-white font-bold tracking-wide">15+ Years of Local Trust</span>
           </div>
         </div>
@@ -51,11 +51,11 @@ export default function Testimonials() {
             >
               <Quote className="absolute top-8 right-10 text-white/5 group-hover:text-sky-blue/20 transition-all duration-500" size={56} aria-hidden="true" />
               
-              <div className="flex gap-1 text-warm-orange mb-6" aria-label="5 star review">
+              <span className="flex gap-1 text-warm-orange mb-6" role="img" aria-label="5 star review">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={14} fill="currentColor" aria-hidden="true" />
                 ))}
-              </div>
+              </span>
 
               <div className="mb-6">
                 <p className="text-sky-blue font-black text-xs uppercase tracking-[0.15em] mb-3">The Result:</p>

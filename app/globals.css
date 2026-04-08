@@ -3,7 +3,7 @@
 @theme {
   --color-deep-navy: oklch(20% 0.08 264); /* Darkened for better contrast */
   --color-sky-blue: oklch(60% 0.14 220); /* Slightly darkened for better text contrast */
-  --color-warm-orange: oklch(70% 0.18 50); /* More vibrant */
+  --color-warm-orange: oklch(55% 0.18 50); /* Darkened for AA contrast (4.5:1) with white */
   --color-palm-green: oklch(55% 0.15 145);
   --color-pure-white: oklch(99% 0 0);
 
